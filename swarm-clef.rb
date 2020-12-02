@@ -2,12 +2,12 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.4.1"
+  version "0.4.2"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/ethersphere/bee-clef/releases/download/v0.4.1/bee-clef-darwin-amd64.tar.gz"
-    sha256 "8b51776bcc4d08cdd2ae9ddeaa7e438ee8f8b643d2b2b58fed10c7bf338568a7"
+    url "https://github.com/ethersphere/bee-clef/releases/download/v0.4.2/bee-clef-darwin-amd64.tar.gz"
+    sha256 "eda535ff031efda6ea3ebfd7f9988abfcb08b68ed6b7f5cbb199e00c73b8108d"
   end
 
   def install
