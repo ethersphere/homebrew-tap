@@ -2,12 +2,12 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "0.4.0"
+  version "0.4.1"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/ethersphere/bee/releases/download/v0.4.0/bee-darwin-amd64.tar.gz"
-    sha256 "147ce13d980f33d344abab9a8fd394b125ae088ce40f5f02fe64a69ab2a3e39e"
+    url "https://github.com/ethersphere/bee/releases/download/v0.4.1/bee-darwin-amd64.tar.gz"
+    sha256 "0a406d8303c5c4052f1f2085236402a0d8953e89a2bba5e7ec829a019cc271d6"
   end
 
   def install
@@ -26,13 +26,13 @@ system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2
   def caveats; <<~EOS
     Logs:   #{var}/log/swarm-bee/bee.log
     Config: #{etc}/swarm-bee/bee.yaml
-    
+
     Bee has SWAP enabled by default and it needs ethereum endpoint to operate.
     It is recommended to use external signer with bee.
     Check documentation for more info:
     - SWAP https://docs.ethswarm.org/docs/installation/manual#swap-bandwidth-incentives
     - External signer https://docs.ethswarm.org/docs/installation/bee-clef
-    
+
     After you finish configuration run 'bee-get-addr'.
   EOS
   end
