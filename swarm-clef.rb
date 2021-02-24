@@ -5,12 +5,12 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.4.8"
+  version "0.4.9"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/ethersphere/bee-clef/releases/download/v0.4.8/bee-clef-darwin-amd64.tar.gz"
-    sha256 "6734beba9fed828c60022e1f12c722db4a862ea14eb505fbd569ec58482e5667"
+    url "https://github.com/ethersphere/bee-clef/releases/download/v0.4.9/bee-clef-darwin-amd64.tar.gz"
+    sha256 "e2f844eb41c7137eaaaf127b91106c8ccd850e988dc04293cdcd6707b0d96eb2"
   end
 
   def install
@@ -22,7 +22,9 @@ class SwarmClef < Formula
   end
 
   def post_install
-    system("if", "[", "!", "-f", var/"lib/swarm-clef/password", "];", "then", "openssl", "rand", "-base64", "32", "-out", var/"lib/swarm-clef/password;", "fi")
+    unless File.exists? "#{var}/lib/swarm-clef/password"
+system("openssl", "rand", "-out", var/"lib/swarm-clef/password", "-base64", "32")
+end
 system(bin/"swarm-clef-init", ">/dev/null", "2>&1")
 
   end
