@@ -5,12 +5,12 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "0.5.0"
+  version "0.5.1"
   bottle :unneeded
 
-  if OS.mac?
-    url "https://github.com/ethersphere/bee/releases/download/v0.5.0/bee-darwin-amd64.tar.gz"
-    sha256 "a95c5ea288b083ce9cd683f4fdcab06cb7efeb8e785265c9c94c34447d8cf55e"
+  if OS.mac? && Hardware::CPU.intel?
+    url "https://github.com/ethersphere/bee/releases/download/v0.5.1/bee-darwin-amd64.tar.gz"
+    sha256 "143461dcf0c068b062a1c402a1014888eb3d499c63f9d08fb387ea420daf4c72"
   end
 
   def install
@@ -21,7 +21,7 @@ class SwarmBee < Formula
   end
 
   def post_install
-    system("openssl", "rand", "-base64", "32", "-out", var/"lib/swarm-bee/password")
+    system("if", "[", "!", "-f", var/"lib/swarm-bee/password", "];", "then", "openssl", "rand", "-base64", "32", ">", var/"lib/swarm-bee/password;", "fi")
 system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2>&1")
 
   end
@@ -30,7 +30,7 @@ system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2
     Logs:   #{var}/log/swarm-bee/bee.log
     Config: #{etc}/swarm-bee/bee.yaml
 
-    Bee has SWAP enabled by default and it needs ethereum endpoint to operate.
+    Bee has SWAP enabled and by default is using slock.it goerli ethereum endpoint.
     It is recommended to use external signer with bee.
     Check documentation for more info:
     - SWAP https://docs.ethswarm.org/docs/installation/manual#swap-bandwidth-incentives
