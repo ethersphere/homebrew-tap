@@ -5,12 +5,12 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "0.5.1"
+  version "0.5.2"
   bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/ethersphere/bee/releases/download/v0.5.1/bee-darwin-amd64.tar.gz"
-    sha256 "143461dcf0c068b062a1c402a1014888eb3d499c63f9d08fb387ea420daf4c72"
+    url "https://github.com/ethersphere/bee/releases/download/v0.5.2/bee-darwin-amd64.tar.gz"
+    sha256 "d1e8290fe9d7d08b7c9ffcf0a66c1866f68a7e502cf81181b7ce2405916afba6"
   end
 
   def install
@@ -21,7 +21,9 @@ class SwarmBee < Formula
   end
 
   def post_install
-    system("if", "[", "!", "-f", var/"lib/swarm-bee/password", "];", "then", "openssl", "rand", "-base64", "32", ">", var/"lib/swarm-bee/password;", "fi")
+    unless File.exists? "#{var}/lib/swarm-bee/password"
+system("openssl", "rand", "-out", var/"lib/swarm-bee/password", "-base64", "32")
+end
 system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2>&1")
 
   end
