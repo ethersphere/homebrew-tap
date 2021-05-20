@@ -5,12 +5,12 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "0.5.3"
+  version "0.6.0"
   bottle :unneeded
 
   if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/ethersphere/bee/releases/download/v0.5.3/bee-darwin-amd64.tar.gz"
-    sha256 "d335ba5bd24f2f8ed37207df4aa9343527289d8e1ffbdfb8c4fffe1a38c8ecd6"
+    url "https://github.com/ethersphere/bee/releases/download/v0.6.0/bee-darwin-amd64.tar.gz"
+    sha256 "37f4e00c84b07dfffa73d2023cb11192b604959da48d1ecac83753564098ee1c"
   end
 
   def install
@@ -32,7 +32,9 @@ system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2
     Logs:   #{var}/log/swarm-bee/bee.log
     Config: #{etc}/swarm-bee/bee.yaml
 
-    Bee has SWAP enabled and by default is using slock.it goerli ethereum endpoint.
+    Bee requires an Ethereum endpoint to function. By default is using ws://localhost:8546 ethereum endpoint.
+    If needed obtain a free Infura account and set:
+    `swap-endpoint: wss://goerli.infura.io/ws/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`
     It is recommended to use external signer with bee.
     Check documentation for more info:
     - SWAP https://docs.ethswarm.org/docs/installation/manual#swap-bandwidth-incentives
