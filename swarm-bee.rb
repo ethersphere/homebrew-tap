@@ -8,7 +8,7 @@ class SwarmBee < Formula
   version "0.6.0"
   bottle :unneeded
 
-  if OS.mac? && Hardware::CPU.intel?
+  if OS.mac?
     url "https://github.com/ethersphere/bee/releases/download/v0.6.0/bee-darwin-amd64.tar.gz"
     sha256 "37f4e00c84b07dfffa73d2023cb11192b604959da48d1ecac83753564098ee1c"
   end
