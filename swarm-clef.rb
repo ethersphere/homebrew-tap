@@ -5,18 +5,19 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.4.13"
+  version "0.5.0"
   bottle :unneeded
 
   if OS.mac?
-    url "https://github.com/ethersphere/bee-clef/releases/download/v0.4.13/bee-clef-darwin-amd64.tar.gz"
-    sha256 "059cc0610e0af774dd364033f73909a19dc9219811f95101f6797ee96a77404c"
+    url "https://github.com/ethersphere/bee-clef/releases/download/v0.5.0/bee-clef-darwin-amd64.tar.gz"
+    sha256 "77236b16b539a91a74b3713b0adb08965ed6008a0089a464226cd3373cf716b2"
   end
 
   def install
     (etc/"swarm-clef").mkpath
     (var/"lib/swarm-clef").mkpath
     bin.install ["clef", "packaging/homebrew/swarm-clef", "packaging/homebrew/swarm-clef-init", "packaging/homebrew/swarm-clef-keys"]
+    etc.install "packaging/default" => "swarm-clef/default" unless File.exists? etc/"swarm-clef/default"
     etc.install "packaging/4byte.json" => "swarm-clef/4byte.json" unless File.exists? etc/"swarm-clef/4byte.json"
     etc.install "packaging/rules.js" => "swarm-clef/rules.js" unless File.exists? etc/"swarm-clef/rules.js"
   end
