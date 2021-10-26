@@ -5,22 +5,21 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.3.0-rc2"
-  bottle :unneeded
+  version "1.3.0-rc3"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.3.0-rc2/bee-darwin-amd64.tar.gz"
-      sha256 "e4ffeb16537b70643e5e2668645372e49d914549d7317bfedc38d187811d4e96"
-    end
-  end
+      url "https://github.com/ethersphere/bee/releases/download/v1.3.0-rc3/bee-darwin-amd64.tar.gz"
+      sha256 "7344a51c414eea802565d9fd4719db4e3b6b89482f5b9b1d96d6839c26e3aa49"
 
-  def install
-    (etc/"swarm-bee").mkpath
-    (var/"lib/swarm-bee").mkpath
-    bin.install ["bee", "packaging/homebrew/bee-get-addr"]
-    etc.install "packaging/homebrew/bee.yaml" => "swarm-bee/bee.yaml" unless File.exists? etc/"swarm-bee/bee.yaml"
+      def install
+        (etc/"swarm-bee").mkpath
+        (var/"lib/swarm-bee").mkpath
+        bin.install ["bee", "packaging/homebrew/bee-get-addr"]
+        etc.install "packaging/homebrew/bee.yaml" => "swarm-bee/bee.yaml" unless File.exists? etc/"swarm-bee/bee.yaml"
+      end
+    end
   end
 
   def post_install
