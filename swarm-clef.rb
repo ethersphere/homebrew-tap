@@ -5,24 +5,36 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.9.0"
-  bottle :unneeded
+  version "0.10.0"
   depends_on :macos
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.9.0/bee-clef-darwin-amd64.tar.gz"
-      sha256 "910044962903bf1120371868afb9d54a3227a2b4a139d9fbfee9d02b8d3c78c5"
-    end
-  end
+    if Hardware::CPU.arm?
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef-darwin-arm64.tar.gz"
+      sha256 "7e0959e548af1b11d87b690837c2fc3b6607923535d72791f8309db69aa5fcc6"
 
-  def install
-    (etc/"swarm-clef").mkpath
-    (var/"lib/swarm-clef").mkpath
-    bin.install ["bee-clef", "packaging/homebrew/swarm-clef", "packaging/homebrew/swarm-clef-init", "packaging/homebrew/swarm-clef-keys"]
-    etc.install "packaging/default" => "swarm-clef/default" unless File.exists? etc/"swarm-clef/default"
-    etc.install "packaging/4byte.json" => "swarm-clef/4byte.json" unless File.exists? etc/"swarm-clef/4byte.json"
-    etc.install "packaging/rules.js" => "swarm-clef/rules.js" unless File.exists? etc/"swarm-clef/rules.js"
+      def install
+        (etc/"swarm-clef").mkpath
+        (var/"lib/swarm-clef").mkpath
+        bin.install ["bee-clef", "swarm-clef", "swarm-clef-init", "swarm-clef-keys"]
+        etc.install "packaging/default" => "swarm-clef/default" unless File.exists? etc/"swarm-clef/default"
+        etc.install "packaging/4byte.json" => "swarm-clef/4byte.json" unless File.exists? etc/"swarm-clef/4byte.json"
+        etc.install "packaging/rules.js" => "swarm-clef/rules.js" unless File.exists? etc/"swarm-clef/rules.js"
+      end
+    end
+    if Hardware::CPU.intel?
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.10.0/bee-clef-darwin-amd64.tar.gz"
+      sha256 "7ed3c80b138241a5b42fe88e6dfeb614c699b6d52763e729d48745c8d075188f"
+
+      def install
+        (etc/"swarm-clef").mkpath
+        (var/"lib/swarm-clef").mkpath
+        bin.install ["bee-clef", "swarm-clef", "swarm-clef-init", "swarm-clef-keys"]
+        etc.install "packaging/default" => "swarm-clef/default" unless File.exists? etc/"swarm-clef/default"
+        etc.install "packaging/4byte.json" => "swarm-clef/4byte.json" unless File.exists? etc/"swarm-clef/4byte.json"
+        etc.install "packaging/rules.js" => "swarm-clef/rules.js" unless File.exists? etc/"swarm-clef/rules.js"
+      end
+    end
   end
 
   def post_install
@@ -56,8 +68,6 @@ system(bin/"swarm-clef-init", ">/dev/null", "2>&1")
   </array>
   <key>RunAtLoad</key>
   <true/>
-  <key>WorkingDirectory</key>
-  <string>/usr/local</string>
   <key>StandardOutPath</key>
   <string>#{var}/log/swarm-clef/swarm-clef.log</string>
   <key>StandardErrorPath</key>
