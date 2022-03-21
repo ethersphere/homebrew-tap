@@ -5,13 +5,13 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.5.0-rc4"
+  version "1.5.0"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee/releases/download/v1.5.0-rc4/bee-darwin-arm64.tar.gz"
-      sha256 "5cdaee6b482a27aa9727442a8ceb49c4e5a4d58d76d5ab90415b25e060db0485"
+      url "https://github.com/ethersphere/bee/releases/download/v1.5.0/bee-darwin-arm64.tar.gz"
+      sha256 "e97e19080abb3100911df8c15333f924ef6651880f59a3889ac9abe94288810b"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -21,8 +21,8 @@ class SwarmBee < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.5.0-rc4/bee-darwin-amd64.tar.gz"
-      sha256 "fa1d9752bd91e7f9bb719e71749beb91a3e17351f37adee3b1920dbf68e59d08"
+      url "https://github.com/ethersphere/bee/releases/download/v1.5.0/bee-darwin-amd64.tar.gz"
+      sha256 "916bde5a18cc7b4df30e2a9d4375bf040424987e0e27756af74440c70769ed95"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -35,10 +35,9 @@ class SwarmBee < Formula
 
   def post_install
     unless File.exists? "#{var}/lib/swarm-bee/password"
-system("openssl", "rand", "-out", var/"lib/swarm-bee/password", "-base64", "32")
-end
-system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2>&1")
-
+    system("openssl", "rand", "-out", var/"lib/swarm-bee/password", "-base64", "32")
+    end
+    system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2>&1")
   end
 
   def caveats; <<~EOS
