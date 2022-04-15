@@ -5,13 +5,13 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.12.0"
+  version "0.12.3"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef-darwin-arm64.tar.gz"
-      sha256 "374b246a1ef6dca33c55b7d632004e2d8a3e76ceb767e87f0c8c6deb5e25cf07"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.3/bee-clef-darwin-arm64.tar.gz"
+      sha256 "531cf0bdedc39e12c214658df86755336c59dc6c10cde26d8a7859b2190db8b0"
 
       def install
         (etc/"swarm-clef").mkpath
@@ -23,8 +23,8 @@ class SwarmClef < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.0/bee-clef-darwin-amd64.tar.gz"
-      sha256 "97edb0c646a9e1bad3183ff214e96fbe024e956940a1790e8e6323a8d802c8f6"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.3/bee-clef-darwin-amd64.tar.gz"
+      sha256 "4598894208409bdfed792860df7fee888637ba2da172a3b330d2806f957d2504"
 
       def install
         (etc/"swarm-clef").mkpath
