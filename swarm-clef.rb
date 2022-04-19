@@ -5,13 +5,13 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.12.4"
+  version "0.13.1"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.4/bee-clef-darwin-arm64.tar.gz"
-      sha256 "7009b88cd5113d82472bed564273c39f16580387b2f62f7e100d1e4195a5e71a"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.13.1/bee-clef-darwin-arm64.tar.gz"
+      sha256 "f17332f457dd49ec391fc8502fcc165577c713bf76a8f8d1230b822f4ef2a273"
 
       def install
         (etc/"swarm-clef").mkpath
@@ -23,8 +23,8 @@ class SwarmClef < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.12.4/bee-clef-darwin-amd64.tar.gz"
-      sha256 "4586550954ef8316b06048b26f55875fc9bfc76af646137bde8000e15869d902"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.13.1/bee-clef-darwin-amd64.tar.gz"
+      sha256 "ac388c0b8b71189fd6eb210efb9df14e5e8912874471d1b9ac36c8a1a0a139be"
 
       def install
         (etc/"swarm-clef").mkpath
@@ -39,10 +39,9 @@ class SwarmClef < Formula
 
   def post_install
     unless File.exists? "#{var}/lib/swarm-clef/password"
-system("openssl", "rand", "-out", var/"lib/swarm-clef/password", "-base64", "32")
-end
-system(bin/"swarm-clef-init", ">/dev/null", "2>&1")
-
+    system("openssl", "rand", "-out", var/"lib/swarm-clef/password", "-base64", "32")
+    end
+    system(bin/"swarm-clef-init", ">/dev/null", "2>&1")
   end
 
   def caveats; <<~EOS
