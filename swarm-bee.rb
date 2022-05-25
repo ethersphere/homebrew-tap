@@ -5,13 +5,13 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.6.0"
+  version "1.6.1-rc1"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee/releases/download/v1.6.0/bee-darwin-arm64.tar.gz"
-      sha256 "f5bceecbc406014766fc948a7879a9e783f98b85cba49244c262ff904c20eb59"
+      url "https://github.com/ethersphere/bee/releases/download/v1.6.1-rc1/bee-darwin-arm64.tar.gz"
+      sha256 "b33cc70c9dab3df1b9e502af8450c476a5571c1e5ee476bed36d4a13e9aa0cfa"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -21,8 +21,8 @@ class SwarmBee < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.6.0/bee-darwin-amd64.tar.gz"
-      sha256 "0576b885127e032e4a67092026a75a9bb9e37e683fadaf84788612fb93c14b94"
+      url "https://github.com/ethersphere/bee/releases/download/v1.6.1-rc1/bee-darwin-amd64.tar.gz"
+      sha256 "6b7091c4235c2526cdf92b9019849502f1250306107545d68bb5a74cc0becbab"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -44,15 +44,11 @@ class SwarmBee < Formula
     Logs:   #{var}/log/swarm-bee/bee.log
     Config: #{etc}/swarm-bee/bee.yaml
 
-    Bee requires an Ethereum endpoint to function. By default is using ws://localhost:8546 ethereum endpoint.
-    If needed obtain a free Infura account and set:
-    swap-endpoint: wss://goerli.infura.io/ws/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    It is recommended to use external signer with bee.
-    Check documentation for more info:
-    - SWAP https://docs.ethswarm.org/docs/installation/manual#swap-bandwidth-incentives
-    - External signer https://docs.ethswarm.org/docs/installation/bee-clef
+    Bee requires a Gnosis Chain RPC endpoint to function. By default this is expected to be found at ws://localhost:8546.
 
-    After you finish configuration run 'bee-get-addr'.
+    Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
+
+    After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
   EOS
   end
 
