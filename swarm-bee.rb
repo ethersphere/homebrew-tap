@@ -5,13 +5,13 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.7.0"
+  version "1.8.0-rc1"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.7.0/bee-darwin-amd64.tar.gz"
-      sha256 "b175269178b5149194798968a9f6d88546ebd60c493ae2cced5fde62bebe56ff"
+      url "https://github.com/ethersphere/bee/releases/download/v1.8.0-rc1/bee-darwin-amd64.tar.gz"
+      sha256 "06491d56a524102b38562dc1e70bc61cc4f226a6a564f9661497fb70b3b4d6ca"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -21,8 +21,8 @@ class SwarmBee < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee/releases/download/v1.7.0/bee-darwin-arm64.tar.gz"
-      sha256 "d70b342a7042d5dd560311aee902ad3419efaa469c1f9c0e7be2b78d5b223371"
+      url "https://github.com/ethersphere/bee/releases/download/v1.8.0-rc1/bee-darwin-arm64.tar.gz"
+      sha256 "a221de0c4dd279a4904091e1956664bdd497e09bf88cfab30144849848707fce"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -40,22 +40,24 @@ class SwarmBee < Formula
     system(bin/"bee", "init", "--config", etc/"swarm-bee/bee.yaml", ">/dev/null", "2>&1")
   end
 
-  def caveats; <<~EOS
-    Logs:   #{var}/log/swarm-bee/bee.log
-    Config: #{etc}/swarm-bee/bee.yaml
+  def caveats
+    <<~EOS
+      Logs:   #{var}/log/swarm-bee/bee.log
+      Config: #{etc}/swarm-bee/bee.yaml
 
-    Bee requires a Gnosis Chain RPC endpoint to function. By default this is expected to be found at ws://localhost:8546.
+      Bee requires a Gnosis Chain RPC endpoint to function. By default this is expected to be found at ws://localhost:8546.
 
-    Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
+      Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
 
-    After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
-  EOS
+      After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
+    EOS
   end
 
-  plist_options :startup => false
+  plist_options startup: false
 
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
+  def plist
+    <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -79,7 +81,7 @@ class SwarmBee < Formula
 </dict>
 </plist>
 
-  EOS
+    EOS
   end
 
   test do
