@@ -5,13 +5,13 @@
 class SwarmClef < Formula
   desc "Ethereum Clef"
   homepage "https://swarm.ethereum.org/"
-  version "0.13.2"
+  version "0.14.0"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.13.2/bee-clef-darwin-arm64.tar.gz"
-      sha256 "cc7b9ce0d780bdfb0ef9dfc68a0d230ef2ef826ac7594928ce5047d5feaa2326"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.14.0/bee-clef-darwin-arm64.tar.gz"
+      sha256 "0b0a53a5f07f1f210bceeb4df1f346da420cd9e73a4265de1247958a315308ad"
 
       def install
         (etc/"swarm-clef").mkpath
@@ -23,8 +23,8 @@ class SwarmClef < Formula
       end
     end
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee-clef/releases/download/v0.13.2/bee-clef-darwin-amd64.tar.gz"
-      sha256 "0319045b403285f541ef5b749938a726607d16e458531c5b2f19986161f7b04a"
+      url "https://github.com/ethersphere/bee-clef/releases/download/v0.14.0/bee-clef-darwin-amd64.tar.gz"
+      sha256 "83ee29bf5f166fcf5f779328bb355cf3dd04e9c04db313c914d146c91a4cf72d"
 
       def install
         (etc/"swarm-clef").mkpath
@@ -44,15 +44,17 @@ class SwarmClef < Formula
     system(bin/"swarm-clef-init", ">/dev/null", "2>&1")
   end
 
-  def caveats; <<~EOS
-    Logs: #{var}/log/swarm-clef/swarm-clef.log
-  EOS
+  def caveats
+    <<~EOS
+      Logs: #{var}/log/swarm-clef/swarm-clef.log
+    EOS
   end
 
-  plist_options :startup => false
+  plist_options startup: false
 
-  def plist; <<~EOS
-    <?xml version="1.0" encoding="UTF-8"?>
+  def plist
+    <<~EOS
+      <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -74,7 +76,7 @@ class SwarmClef < Formula
 </dict>
 </plist>
 
-  EOS
+    EOS
   end
 
   test do
