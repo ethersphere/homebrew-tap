@@ -11,7 +11,7 @@ class SwarmBee < Formula
   on_macos do
     if Hardware::CPU.intel?
       url "https://github.com/ethersphere/bee/releases/download/v1.12.0-rc6/bee-darwin-amd64.tar.gz"
-      sha256 "f681528c0ff8591f325f05c053f9d451deb4f775cc3e9992b5ea3fdbf49b3445"
+      sha256 "78f3d8c9482bac8efc981dad93a1654d1d595dc1625c813113a2f4f28254dcf3"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -22,7 +22,7 @@ class SwarmBee < Formula
     end
     if Hardware::CPU.arm?
       url "https://github.com/ethersphere/bee/releases/download/v1.12.0-rc6/bee-darwin-arm64.tar.gz"
-      sha256 "0f6813f20b777da81c5340a8ce135ae2a00487b3defe150dc59b82b30f584534"
+      sha256 "6c6d4bd414142ee4d37f80c73de010955a27b03afcb739e038d47a3626283660"
 
       def install
         (etc/"swarm-bee").mkpath
