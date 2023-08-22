@@ -13,5 +13,4 @@ Available packages:
 
 Package|Description
 ---|---
-swarm-clef|official ethereum clef binary wrapped and preconfigured for bee as a service.
 swarm-bee|swarm client implemented in go
