@@ -53,35 +53,11 @@ class SwarmBee < Formula
     EOS
   end
 
-  plist_options startup: false
-
-  def plist
-    <<~EOS
-      <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>KeepAlive</key>
-  <true/>
-  <key>Label</key>
-  <string>#{plist_name}</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>#{bin}/bee</string>
-    <string>start</string>
-    <string>--config</string>
-    <string>#{etc}/swarm-bee/bee.yaml</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StandardOutPath</key>
-  <string>#{var}/log/swarm-bee/bee.log</string>
-  <key>StandardErrorPath</key>
-  <string>#{var}/log/swarm-bee/bee.log</string>
-</dict>
-</plist>
-
-    EOS
+  service do
+    run [bin/"bee", "start", "--config", etc/"swarm-bee/bee.yaml"]
+    keep_alive true
+    error_log_path var/"log/swarm-bee/bee.log"
+    log_path var/"log/swarm-bee/bee.log"
   end
 
   test do
