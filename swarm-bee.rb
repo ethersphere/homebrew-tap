@@ -5,13 +5,13 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.17.3-rc1"
+  version "1.17.3"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.17.3-rc1/bee-darwin-amd64.tar.gz"
-      sha256 "93cb5838f09ab57dbdd37ded6a3276efe1a2ef4f9588adb5adea4ceec8b1128d"
+      url "https://github.com/ethersphere/bee/releases/download/v1.17.3/bee-darwin-amd64.tar.gz"
+      sha256 "30dead036d24b295916c031d6fac76f55f6e5fb789af5904df2fdc8413b1c901"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -21,8 +21,8 @@ class SwarmBee < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee/releases/download/v1.17.3-rc1/bee-darwin-arm64.tar.gz"
-      sha256 "30c291065b0101420905eb30d77b90a18570523eea4eec2696b52d37dcd99d85"
+      url "https://github.com/ethersphere/bee/releases/download/v1.17.3/bee-darwin-arm64.tar.gz"
+      sha256 "7a38797359feec07cb4982493999603725a4ff2788d5692f5ed170aba111f331"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -49,39 +49,15 @@ class SwarmBee < Formula
 
       Please see https://docs.ethswarm.org/docs/installation/install for more details on how to configure your node.
 
-      After you finish configuration run 'sudo bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
+      After you finish configuration run 'bee-get-addr' and fund your node with XDAI, and also XBZZ if so desired.
     EOS
   end
 
-  plist_options startup: false
-
-  def plist
-    <<~EOS
-      <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>KeepAlive</key>
-  <true/>
-  <key>Label</key>
-  <string>#{plist_name}</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>#{bin}/bee</string>
-    <string>start</string>
-    <string>--config</string>
-    <string>#{etc}/swarm-bee/bee.yaml</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StandardOutPath</key>
-  <string>#{var}/log/swarm-bee/bee.log</string>
-  <key>StandardErrorPath</key>
-  <string>#{var}/log/swarm-bee/bee.log</string>
-</dict>
-</plist>
-
-    EOS
+  service do
+    run [bin/"bee", "start", "--config", etc/"swarm-bee/bee.yaml"]
+    keep_alive true
+    error_log_path var/"log/swarm-bee/bee.log"
+    log_path var/"log/swarm-bee/bee.log"
   end
 
   test do
