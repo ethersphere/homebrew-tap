@@ -5,13 +5,13 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "1.17.3"
+  version "1.17.4-rc1"
   depends_on :macos
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/ethersphere/bee/releases/download/v1.17.3/bee-darwin-amd64.tar.gz"
-      sha256 "30dead036d24b295916c031d6fac76f55f6e5fb789af5904df2fdc8413b1c901"
+      url "https://github.com/ethersphere/bee/releases/download/v1.17.4-rc1/bee-darwin-amd64.tar.gz"
+      sha256 "bac7146550fc8a4a09b7a01dfab363cd11d683f269884538a0218d343fd4f804"
 
       def install
         (etc/"swarm-bee").mkpath
@@ -21,8 +21,8 @@ class SwarmBee < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/ethersphere/bee/releases/download/v1.17.3/bee-darwin-arm64.tar.gz"
-      sha256 "7a38797359feec07cb4982493999603725a4ff2788d5692f5ed170aba111f331"
+      url "https://github.com/ethersphere/bee/releases/download/v1.17.4-rc1/bee-darwin-arm64.tar.gz"
+      sha256 "4697fd203523e3bc20e2026c1a0ff81fb6785e96e0a9e81e00ce1d0ffee61be2"
 
       def install
         (etc/"swarm-bee").mkpath
