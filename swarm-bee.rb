@@ -5,12 +5,12 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "2.3.0-rc2"
+  version "2.3.0-rc3"
   depends_on :macos
 
   on_intel do
-    url "https://github.com/ethersphere/bee/releases/download/v2.3.0-rc2/bee-darwin-amd64.tar.gz"
-    sha256 "bec78393841774f13ab68e9ffd2748ef7e50283680e75da7a962793ef8759608"
+    url "https://github.com/ethersphere/bee/releases/download/v2.3.0-rc3/bee-darwin-amd64.tar.gz"
+    sha256 "76c6f213d68b9389444f713682a786f894c7ea297f9167a98acd88e223bc0afc"
 
     def install
       (etc/"swarm-bee").mkpath
@@ -20,8 +20,8 @@ class SwarmBee < Formula
     end
   end
   on_arm do
-    url "https://github.com/ethersphere/bee/releases/download/v2.3.0-rc2/bee-darwin-arm64.tar.gz"
-    sha256 "5ad6757c8d9ea45379ee7eb77b7693cc9723836ea02ac11e23bc024462534c27"
+    url "https://github.com/ethersphere/bee/releases/download/v2.3.0-rc3/bee-darwin-arm64.tar.gz"
+    sha256 "aeb937cc7dfafdc008e716f8b94fb7533eebb837c55f1c37cccd53104a872230"
 
     def install
       (etc/"swarm-bee").mkpath
