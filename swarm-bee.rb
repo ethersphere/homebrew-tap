@@ -5,14 +5,14 @@
 class SwarmBee < Formula
   desc "Ethereum Swarm node"
   homepage "https://swarm.ethereum.org/"
-  version "2.7.0"
+  version "2.7.1"
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/ethersphere/bee/releases/download/v2.7.0/bee-darwin-amd64.tar.gz"
-    sha256 "ccf2c57f334c930473e936269c24d13e1be3f19e9f6e1062e43eed3273955a49"
+    url "https://github.com/ethersphere/bee/releases/download/v2.7.1/bee-darwin-amd64.tar.gz"
+    sha256 "ba93e5c4f47c0e7b6e0bf4cee4b5879f274466b96cc444ae6c27bb5e3a1c027a"
 
-    def install
+    define_method(:install) do
       (etc/"swarm-bee").mkpath
       (var/"lib/swarm-bee").mkpath
       bin.install ["bee", "bee-get-addr"]
@@ -20,10 +20,10 @@ class SwarmBee < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/ethersphere/bee/releases/download/v2.7.0/bee-darwin-arm64.tar.gz"
-    sha256 "a480535cb5f4791945b7c7242203d15c33a1abca54e8bc6f01bda9e3a3071e0e"
+    url "https://github.com/ethersphere/bee/releases/download/v2.7.1/bee-darwin-arm64.tar.gz"
+    sha256 "e70f9612109cff5c85dd7f77b8e132b9ebc86db4294a64efd1cd2eabadae7c10"
 
-    def install
+    define_method(:install) do
       (etc/"swarm-bee").mkpath
       (var/"lib/swarm-bee").mkpath
       bin.install ["bee", "bee-get-addr"]
